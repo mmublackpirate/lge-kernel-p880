@@ -77,9 +77,15 @@ static struct mutex gov_state_lock;
 static struct kobject *interactive_kobj;
 static unsigned int active_count;
 
+
 /* Go to max speed when CPU load at or above this value. */
 #define DEFAULT_GO_MAXSPEED_LOAD 85
 static unsigned long go_maxspeed_load;
+
+/* Hi speed to bump to from lo speed when load burst (default max) */
+#define DEFAULT_HISPEED_FREQ 1000000
+static u64 hispeed_freq;
+
 
 /* Base of exponential raise to max speed; if 0 - jump to maximum */
 static unsigned long boost_factor;
@@ -122,8 +128,13 @@ static unsigned long high_freq_min_delay;
  * The maximum frequency CPUs are allowed to run normally
  * 0 if disabled
  */
+
 #define DEFAULT_MAX_NORMAL_FREQ 0
 static unsigned long max_normal_freq;
+
+
+#define DEFAULT_INPUT_BOOST_FREQ 1300000 
+static int input_boost_freq;
 
 
 /* Defines to control mid-range frequencies */
